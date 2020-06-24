@@ -20,7 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('stock');
             $table->text('description');
             $table->string('product_id');
-            $table->string('image')->nullable();
+            $table->string('filename')->nullable();
+            $table->string('mime')->nullable();
+            $table->string('original_filename')->nullable();
             $table->string('user_id')->nullable();
             $table->string('category_id')->nullable();
             $table->enum('status',['in_stock', 'out_of_stock'])->default('in_stock');

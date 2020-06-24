@@ -1,131 +1,61 @@
-@extends('layouts.main')
-@section('content')
+ @extends('Layouts.home')
+ @section('content')
 
-                 <div class="pcoded-content">
-                        <div class="pcoded-inner-content">
-                            <!-- Main-body start -->
-                            <div class="main-body">
-                                <div class="page-wrapper">
-									<!-- Page-header start -->
-                                    <div class="page-header card">
-                                        <div class="card-block">
-                                            <button class="btn btn-primary btn-round" style="float:right;"  data-toggle="modal" data-target="#exampleModal">Add Products</button> 
-                                        </div>
+
+ <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-lg-10">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Add Products</strong>
+                                       
                                     </div>
+                                    <div class="card-body card-block">
+                                         <form id="productsForm" method="post" action="/addProducts" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name="product_id" id="product_id" value="{{ $product_id }}">
 
-<!-- Modal Class -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add a Product</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
 
-      <div class="modal-body">
-      	<form id= productsForm method="post">
-      		<meta name="csrf-token" content="{{ csrf_token() }}">
-      		<input type="hidden" name="product_id" id="product_id" value="{{ $product_id }}">
-          <div class="input-group">
-               <input type="text" class="form-control" placeholder="Product Name" name="name" id="name">
-                            <span class="md-line"></span>
-             </div>
-           <div class="input-group">
-               <input type="text" class="form-control" placeholder="Product Price" name="price" id="price">
-                            <span class="md-line"></span>
-             </div>
-            <div class="input-group">
-               <input type="text" class="form-control" placeholder="Product Stock" name="stock" id="stock">
-                            <span class="md-line"></span>
-             </div>
-            <div class="input-group">
-               <textarea rows="5" cols="5" class="form-control"
+                                        <div class="form-group">
+                                            <label for="product_name" class=" form-control-label">Product Name</label>
+                                            <input type="text" id="name" name="name" placeholder="Enter your Product Name" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="product_price" class=" form-control-label">Product Price</label>
+                                            <input type="text" id="price" name="price" placeholder="Enter the Product Price" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="product_stock" class=" form-control-label">Product Stock</label>
+                                            <input type="text" id="stock" name="stock" placeholder="Enter No of Product Items" class="form-control">
+                                        </div>
+                                        
+                                                    <div class="form-group">
+                                                    <label for="city" class=" form-control-label">Product Description</label>
+                                                     <textarea rows="3" cols="3" class="form-control"
                          placeholder="Product Description" name="description" id="description"></textarea>
-             </div>
+                                                </div>
 
-                     <div class=" col-form-label">
-            <label class="mr-2">Upload your Product:</label>
-            <input type="file" name="file" class="form-control">
+                                                
+                <div class="form-group">
+            <label class="image">Upload your Product:</label>
+            <input type="file" name="image" id="image" class="form-control">
           </div>
-         </form>
-           
-      </div>
-       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" id="saveProducts" class="btn btn-primary">Save Products</button>
-      </div>
 
-      </div>
-  </div>
-</div>
-   
-                                
-                               
-                                  <div class="page-body">
-                                   
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>Basic table</h5>
-                                            <span>use class <code>table</code> inside table element</span>
-                                            <div class="card-header-right">
-												<ul class="list-unstyled card-option">
-													<li><i class="fa fa-chevron-left"></i></li>
-													<li><i class="fa fa-window-maximize full-card"></i></li>
-													<li><i class="fa fa-minus minimize-card"></i></li>
-													<li><i class="fa fa-refresh reload-card"></i></li>
-													<li><i class="fa fa-times close-card"></i></li>
-												</ul>
-											</div>
-
-                                        </div>
-                                        <div class="card-block table-border-style">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>First Name</th>
-                                                            <th>Last Name</th>
-                                                            <th>Username</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>Jacob</td>
-                                                            <td>Thornton</td>
-                                                            <td>@fat</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td>Larry</td>
-                                                            <td>the Bird</td>
-                                                            <td>@twitter</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                         <div class="form-actions form-group">
+                                                <button type="submit" id="submitButton" class="btn btn-success btn-sm">Submit</button>
                                             </div>
-                                        </div>
+                                    </form>
                                     </div>
-                          
-                           
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- Main-body end -->
-
-                       
                     </div>
                 </div>
             </div>
-       
-<script type="text/javascript " src="dashboard/assets/js/addproduct.js "></script>
 
+<script type="text/javascript " src="home/js/products.js "></script>
 @endsection

@@ -14,7 +14,7 @@ $('#saveProducts').click(function(e){
 			'stock':$('input[id=stock]').val(),
 			'description':$('textarea[id=description]').val(),
 			'product_id':$('input[id=product_id]').val(),
-		},
+					},
         dataType: "json",
 
         success: function success(data){

@@ -23,8 +23,9 @@ Route::post('/registerUser', 'RegisterController@RegisterUser');
 Route::get('/otp', 'LoginController@GenerateOTP');
 Route::post('/loginUser', 'LoginController@LoginUser');
 Route::post('/otpSubmit', 'LoginController@VerifyOTP');
-Route::get('/home', 'DashboardController@DashboardViewer');
 Route::get('/products','ProductController@ProductView');
 Route::post('/addProducts', 'ProductController@AddProducts');
 Route::get('/id', 'ProductController@generateProductID');
-
+Route::get('/getHome','DashboardController@ViewDashboard');
+Route::get('/displayProducts','ProductController@getProducts');
+Route::post('/delete','ProductController@deleteProducts');
