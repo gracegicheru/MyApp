@@ -184,13 +184,14 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="/products">
+                                <i class="fas fa-table"></i>Products</a>
+                        </li>
+                        <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
-                        <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
-                        </li>
+                        
                         <li>
                             <a href="form.html">
                                 <i class="far fa-check-square"></i>Forms</a>

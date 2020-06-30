@@ -17,15 +17,19 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', 'IndexController@Display');
-Route::get('/login', 'LoginController@Login');
-Route::get('/register', 'RegisterController@Register');
+// Route::get('/login', 'LoginController@Login');
+// Route::get('/register', 'RegisterController@Register');
 Route::post('/registerUser', 'RegisterController@RegisterUser');
 Route::get('/otp', 'LoginController@GenerateOTP');
 Route::post('/loginUser', 'LoginController@LoginUser');
 Route::post('/otpSubmit', 'LoginController@VerifyOTP');
-Route::get('/products','ProductController@ProductView');
+Route::get('/products','ProductController@displayProducts');
 Route::post('/addProducts', 'ProductController@AddProducts');
 Route::get('/id', 'ProductController@generateProductID');
 Route::get('/getHome','DashboardController@ViewDashboard');
-Route::get('/displayProducts','ProductController@getProducts');
 Route::post('/delete','ProductController@deleteProducts');
+Route::post('/editProduct', 'ProductController@editProducts');
+
+Auth::routes();
+
+// Route::get('/gethome', 'HomeController@index')->name('home');
