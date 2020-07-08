@@ -15,30 +15,39 @@ class ProductController extends Controller
     	return view('products1', ['product_id'=>$product_id],['products'=>$products]);
     }
     public function AddProducts(Request $request){
+        // dd(request()->all());
+        // dd($request->hasFile('image')!=null);
+        // $photo = $request->filled('image');
+        // dd($photo);
+        // $extension = $request->file('image');
+        // dd($extension);
+       // dd($request->filled('image'));
+
     	 $data= request()->validate([
         'name'=>'required',
          'price'=>'required',
          'description'=>'required',
          'stock'=>'required',
          'product_id'=>'required',
-        // 'image'=>'required',
+        'image'=>'required',
 
         ]);
 
-    	      // if($request->hasFile('image')){
+    $photo = $request->file('image');
+    $extension = $photo->getClientOriginalExtension();
+    Storage::disk('public')->put($photo->getFilename().'.'.$extension,  File::get($photo));
 
-            // $fileNameWithExt= $request->file('image')->getClientOriginalName();
-            // $fileName= pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            // $extension=$request->file('image')->getClientOriginalExtension();
-            // $fileNameToStore= $fileName.'_'.time().'.'.$extension;
-            // // $fileNameToStore=time().'.'.$request->image->getClientOriginalExtension();
-            // $path=$request->file('image')->storeAs('public/images', $fileNameToStore);
-         // }else{
-         //    $fileNameToStore='noimage.png';
+          // if($request->filled('image')){
 
 
-         // }
-
+          //   $fileNameWithExt= $request->filled('image')->getClientOriginalName();
+          //   $fileName= pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+          //   $extension=$request->filled('image')->getClientOriginalExtension();
+          //   $fileNameToStore= $fileName.'_'.time().'.'.$extension;
+          //   // $fileNameToStore=time().'.'.$request->image->getClientOriginalExtension();
+          //   $path=$request->filled('image')->storeAs('public/images', $fileNameToStore);
+        
+       
 
     	 $product= new Product;
     
@@ -47,21 +56,24 @@ class ProductController extends Controller
         $product->description= $data['description'];
         $product->stock= $data['stock'];
         $product->product_id= $data['product_id'];
-        // $product->image= $fileNameToStore;
-        
+        $product->mime = $photo->getClientMimeType();
+        $product->original_filename = $photo->getClientOriginalName();
+        $product->filename = $photo->getFilename().'.'.$extension;
+        // $product->image=$fileNameToStore;        
 
     	 $product->save();
 
-    	  // if ($data->fails())
-       //  {
-       //      return response()->json(["data"=>$data->errors()->all()]);
-       //  }
 
+
+    	
     	 return response()->json([
 
     	 	"data"=> $product,
     	 	"status"=>"ok"
     	 ]);
+
+         // }
+
     	   
 
 

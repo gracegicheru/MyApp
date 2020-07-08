@@ -15,6 +15,7 @@ $('#submitButton').click(function(e){
             'stock':$('input[id=stock]').val(),
             'description':$('textarea[id=description]').val(),
             'product_id':$('input[id=product_id]').val(),
+            'image':$('input[id=image]').val(),
                     },
         dataType: "json",
         beforeSend: function(){
@@ -24,6 +25,14 @@ $('#submitButton').click(function(e){
             
             
             if(data.status=='ok') {
+
+                Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'A product has been added',
+  showConfirmButton: false,
+  timer: 3000
+})
                 $('#name').val('');
                 $('#price').val('');
                 $('#stock').val('');
@@ -32,19 +41,20 @@ $('#submitButton').click(function(e){
                 
 
                 window.location.reload(true);
+   }
 
-            }
+            
 
         },
         error:function(xhr, errmsg, err){
             console.log('error', xhr);
             console.log('status', errmsg);
             console.log('err', err);
-             $.each(xhr.errors, function(key, val){
-                            console.log( "subject",key, val);
-                            $('.alert-danger').show();
-                            $('.alert-danger').append('<p>'+value+'</p>');
-                        });
+        //      $.each(xhr.errors, function(key, val){
+        //                     console.log( "subject",key, val);
+        //                     $('.alert-danger').show();
+        //                     $('.alert-danger').append('<p>'+value+'</p>');
+        //                 });
 
         }
 
@@ -54,6 +64,27 @@ $('#submitButton').click(function(e){
 });
 
 $('.deleteProduct').click(function(){
+
+     
+Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.value) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+
+
     console.log('this');
     let id=$(this).prop('id');
     console.log("id", id);

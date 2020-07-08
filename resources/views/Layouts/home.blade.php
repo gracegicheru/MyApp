@@ -4,6 +4,7 @@
 <head>
 
       <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <!-- Required meta tags-->
     <meta charset="UTF-8">

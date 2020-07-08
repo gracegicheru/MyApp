@@ -12,21 +12,19 @@ class RegisterController extends Controller
 {
     
     public function Register(){
-    	return view('register');
+    	return view('auth.register');
     }
     public function RegisterUser(){
 
     	$credentials= request()->validate([
-    		'fname'=>['required', 'string','max:255'],
-    		'lname'=>['required', 'string','max:255'],
+    		'name'=>['required', 'string','max:255'],
     		'email'=>['required', 'string', 'email','max:255', 'unique:users'],
     		'phone'=>['required', 'string','max:14'],
     		'password'=>['required', 'string','min:6'],
     	]);
 
     	$user= new User;
-    	$user->fname = $credentials['fname'];
-    	$user->lname = $credentials['lname'];
+    	$user->name = $credentials['name'];
     	$user->email = $credentials['email'];
     	$user->phone = $credentials['phone'];
     	$user->password = Hash::make($credentials['password']);

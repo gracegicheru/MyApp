@@ -82,7 +82,7 @@
                             <div class="card-body card-block">
                             	<div class="alert alert-danger" style="display:none"></div>
 
-                                <form action="/addProducts"  method="post" id="productsForm" enctype="multipart/form-data">
+                                <form action="/addProducts"  method="post" id="productsForm" eenctype="multipart/form-data">
 
                                 	 <meta name="csrf-token" content="{{ csrf_token() }}">
                                             <input type="hidden" name="product_id" id="product_id" value="{{ $product_id }}">                               

@@ -1,4 +1,4 @@
-$('#registerbtn').click(function (e){
+ $('#registerbtn').click(function (e){
 	console.log("I was clicked");
 	e.preventDefault();
 	let form = $('#registerform');
@@ -8,8 +8,38 @@ $('#registerbtn').click(function (e){
 		data:form.serialize(),
 		dataType: "json",
 
-	});
-	success: function success(){
+	success: function(data){
 		console.log("status", data);
-	}
+		   if(data.status=='ok') {
+                $('#name').val('');
+                $('#email').val('');
+                $('#password').val('');
+                $('#phone').val('');
+                
+
+                window.location.reload(true);
+
+            }
+	},
 });
+});
+
+  $('#loginBtn').click(function (e){
+	console.log("I was clicked");
+	e.preventDefault();
+	let form = $('#loginForm');
+	$.ajax({
+		type:'post',
+		url:'/sampleuser',
+		data:form.serialize(),
+		dataType: "json",
+
+	success: function(data){
+		console.log("status", data);
+		  
+
+	},
+});
+});
+
+  

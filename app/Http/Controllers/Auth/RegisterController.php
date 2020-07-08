@@ -24,6 +24,24 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+
+    public function register(){
+        $credentials=request()->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:14'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+        $user=new User;
+
+        $user->name= $credentials['name'];
+        $user->email= $credentials['email'];
+        $user->phone= $credentials['phone'];
+        $user->password=Hash::make($credentials['password']);
+        $user->save();
+   }
+
+
     /**
      * Where to redirect users after registration.
      *
@@ -47,14 +65,15 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'phone'=>['required', 'string', 'max:14'],
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
+    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -62,12 +81,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+     // protected function create(array $data)
+     // {
+     //    return User::create([
+     //     'name' => $data['name'],
+     //        'email' => $data['email'],
+     //        'phone'=>$data['phone'],
+     //        'password' => Hash::make($data['password']),
+     //   ]);
+     // }
 }
